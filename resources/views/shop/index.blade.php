@@ -7,6 +7,7 @@
 
         <h1 class="my-4">Shop Name</h1>
         <div class="list-group">
+          <a href="{{route('shop')}}" class="list-group-item">All Categories</a>
           @foreach ($categories as $item)
           <a href="/?category_id={{$item->id}}" class="list-group-item">{{$item->name}}</a>
           @endforeach
@@ -44,28 +45,50 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
+      
         <div class="row">
            
            @foreach ($products as $item)
-               
-           <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{asset('storage/' . $item->photo)}}" alt="">{{'storage/' .$item->photo}}</a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">{{$item->name}}</a>
-                </h4>
-                <h5>{{$item->price}}$</h5>
-                <p class="card-text">{{$item->description}}</p>
-                <hr>
-               Category:{{$item->category->name}}
+               @if  (isset($_GET['category_id']) )
+                 @if ($_GET['category_id'] == $item->category_id) 
+                 <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="{{asset('storage/' . $item->photo)}}" alt=""></a>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="#">{{$item->name}}</a>
+                      </h4>
+                      <h5>{{$item->price}}$</h5>
+                      <p class="card-text">{{$item->description}}</p>
+                      <hr>
+                     Category:{{$item->category->name}}
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </div>
+                  </div>
+                </div>
+                 @endif            
+
+              @else
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{asset('storage/' . $item->photo)}}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="#">{{$item->name}}</a>
+                    </h4>
+                    <h5>{{$item->price}}$</h5>
+                    <p class="card-text">{{$item->description}}</p>
+                    <hr>
+                   Category:{{$item->category->name}}
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  </div>
+                </div>
               </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
+               @endif
 
            @endforeach
 

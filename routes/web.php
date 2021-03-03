@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/',[ShopController::class , 'index'])->name('shop');
+Route::get('/','ShopController@index')->name('shop');
 
 Route::get('/about',function(){
     return view('shop.about');
@@ -35,4 +35,6 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('category', 'CategoryController');
     Route::resource('product', 'ProductController');
+    Route::resource('slide', 'SlideController');
 });
+

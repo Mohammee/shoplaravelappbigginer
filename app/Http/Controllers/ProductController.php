@@ -85,12 +85,13 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
          $product = Product::findOrFail($id);
+         $path = $request->file('photo')->store('photos','public');
          $product->update([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'photo' => ''
+            'photo' => $path
          ]);
          return redirect()->route('product.index')->with('message','Products updated successfully');
     }
